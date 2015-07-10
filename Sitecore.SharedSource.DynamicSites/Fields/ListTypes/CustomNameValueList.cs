@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.Web;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using StringDictionary = Sitecore.Collections.StringDictionary;
@@ -36,7 +37,7 @@ namespace Sitecore.SharedSource.DynamicSites.Fields.ListTypes
                 var dictionary = new StringDictionary();
                 foreach (var key in NameValues.AllKeys)
                 {
-                    dictionary.Add(key,NameValues[key].Replace("%2F","/"));
+                    dictionary.Add(key, HttpUtility.UrlDecode(NameValues[key]));
                 }
                 return dictionary;
             }
