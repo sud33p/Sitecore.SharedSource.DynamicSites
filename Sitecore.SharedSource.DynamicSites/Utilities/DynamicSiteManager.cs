@@ -10,6 +10,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Publishing;
 using Sitecore.SecurityModel;
 using Sitecore.SharedSource.DynamicSites.Items.BaseTemplates;
+using Sitecore.SharedSource.DynamicSites.Sites;
 using Sitecore.Sites;
 using Sitecore.StringExtensions;
 using Sitecore.Web;
@@ -218,6 +219,9 @@ namespace Sitecore.SharedSource.DynamicSites.Utilities
                 if (!item.Inherit.Value.IsNullOrEmpty())
                     properties["inherits"] = item.Inherit.Value;
 
+                if (!item.Placement.Text.IsNullOrEmpty())
+                    properties["placement"] = item.Placement.Text;
+
                 properties["cacheHtml"] = item.CacheHtml.Checked.ToString();
                 properties["cacheMedia"] = item.CacheMedia.Checked.ToString();
                 properties["enableDebugger"] = item.EnableDebugger.Checked.ToString();
@@ -294,6 +298,15 @@ namespace Sitecore.SharedSource.DynamicSites.Utilities
         {
             if (DynamicSiteSettings.GetSiteCache.Count() > 0)
                 DynamicSiteSettings.GetSiteCache.Clear();
+        }
+
+        public static void Reset()
+        {
+            var provider = SiteManager.Providers["dynamic"] as DynamicSitesProvider;
+            provider?.Reset();
+
+            //reset SiteContextFactory
+            SiteContextFactory.Reset();
         }
 
         public static SiteContext GetSiteContextByContentItem(Item contentitem)

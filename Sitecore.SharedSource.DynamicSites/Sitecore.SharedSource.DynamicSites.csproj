@@ -33,6 +33,12 @@
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>..\..\..\Sites\sc82u2\Website\bin\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\Sites\sc82u2\Website\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="SharedSource.Sitecore.ValueListField">
       <HintPath>..\References\Sitecore.SharedSource.ValueListField\SharedSource.Sitecore.ValueListField.dll</HintPath>
     </Reference>
@@ -52,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Caching\SiteCache.cs" />
     <Compile Include="Caching\SiteCacheItem.cs" />
+    <Compile Include="Events\EventHelper.cs" />
     <Compile Include="Events\ItemHandler.cs" />
     <Compile Include="Events\ItemRenamedEventArgs.cs" />
     <Compile Include="Fields\BaseCustomField.cs" />
@@ -69,6 +76,7 @@
     <Compile Include="Pipelines\Loader\InitializeDynamicSites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sites\DynamicSitesProvider.cs" />
+    <Compile Include="Sites\OrderedSitecoreSiteProvider.cs" />
     <Compile Include="Sites\SwitcherSiteProvider.cs" />
     <Compile Include="Utilities\DynamicSiteManager.cs" />
     <Compile Include="Utilities\DynamicSiteSettings.cs" />

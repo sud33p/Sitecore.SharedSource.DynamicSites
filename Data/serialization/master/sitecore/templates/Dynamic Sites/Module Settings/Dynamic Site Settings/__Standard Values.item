@@ -1,0 +1,80 @@
+----item----
+version: 1
+id: {389874AE-185C-44D4-8671-1B26697FC00F}
+database: master
+path: /sitecore/templates/Dynamic Sites/Module Settings/Dynamic Site Settings/__Standard Values
+parent: {FAA42375-D5C7-4057-A386-80E396078B36}
+name: __Standard Values
+master: {00000000-0000-0000-0000-000000000000}
+template: {FAA42375-D5C7-4057-A386-80E396078B36}
+templatekey: Dynamic Site Settings
+created: 20141225T223408Z
+
+----version----
+language: en
+version: 1
+revision: e0f8e724-2e22-434d-a968-1df65eddc3da
+
+----field----
+field: {1786D514-1E3B-433E-B4DD-F6AF294D4A81}
+name: Sites Folder
+key: sites folder
+content-length: 38
+
+{0DE95AE4-41AB-4D01-9EB0-67441B7C2450}
+----field----
+field: {4BCF6450-7B82-4C66-BB84-4AB308E0622C}
+name: Site Definition Template
+key: site definition template
+content-length: 38
+
+{76036F5E-CBCE-46D1-AF0A-4143F9B557AA}
+----field----
+field: {BBEB1B1C-79C9-4CCD-98CC-4A4050832030}
+name: Default Start Item
+key: default start item
+content-length: 38
+
+{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20141226T093408
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+e0f8e724-2e22-434d-a968-1df65eddc3da
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20141226T093555:635551833557842277
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

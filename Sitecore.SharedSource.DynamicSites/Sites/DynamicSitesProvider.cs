@@ -14,21 +14,39 @@ namespace Sitecore.SharedSource.DynamicSites.Sites
     [UsedImplicitly]
     public class DynamicSitesProvider : SiteProvider
     {
+        private readonly object _initializeLocker = new object();
         private string _dynamicConfigPath;
-        private SiteCollection _sites;
-        private List<KeyValuePair<string, Site>> _dynamicSiteDictionary;
- 
+        private Dictionary<string, Site> _dynamicSiteDictionary;
+
+        protected Dictionary<string, Site> DynamicSites
+        {
+            get
+            {
+                if (_dynamicSiteDictionary == null)
+                {
+                    lock (_initializeLocker)
+                    {
+                        if (_dynamicSiteDictionary == null)
+                        {
+                            _dynamicSiteDictionary = GetDynamicSites();
+                        }
+                    }
+                }
+                return _dynamicSiteDictionary;
+            }
+        }
+
         public override Site GetSite(string siteName)
         {
             Assert.ArgumentNotNullOrEmpty(siteName,"siteName");
-            InitializeSites();
             return _dynamicSiteDictionary.GetSiteByKey(DynamicSiteManager.CleanCacheKeyName(siteName));
         }
 
         public override SiteCollection GetSites()
         {
-            InitializeSites();
-            return _sites;
+            var siteCollection = new SiteCollection();
+            siteCollection.AddRange((IEnumerable<Site>)DynamicSites.Values);
+            return siteCollection;
         }
 
         public override void Initialize(string name, NameValueCollection config)
@@ -39,33 +57,32 @@ namespace Sitecore.SharedSource.DynamicSites.Sites
             _dynamicConfigPath = config["siteConfig"];
         }
 
-        private void InitializeSites()
+        public void Reset()
         {
-            if (DynamicSiteSettings.GetSiteCache.Count() > 0 && _sites != null && _dynamicSiteDictionary.Count > 0) return;
+            _dynamicSiteDictionary = (Dictionary<string, Site>)null;
+        }
 
-            Assert.IsNotNullOrEmpty(_dynamicConfigPath, "No siteConfig specified in DynamicSiteProvider configuration.");
+        private Dictionary<string, Site> GetDynamicSites()
+        {
+            Assert.IsNotNullOrEmpty(_dynamicConfigPath,
+                    "No siteConfig specified in DynamicSiteProvider configuration.");
             var collection = new SiteCollection();
 
             var nodes = Factory.GetConfigNodes(FileUtil.MakePath(_dynamicConfigPath, "defaultsite", '/'));
             Assert.IsFalse((nodes.Count > 1 ? 1 : 0) != 0, "Duplicate Dynamic Default Site Definition.");
 
-            if (nodes.Count == 0) return;
+            if (nodes.Count == 0)
+            {
+                return new Dictionary<string, Site>();
+            }
 
             var defaultSite = ParseDefaultNode(nodes[0]);
 
             //Create Dictionary
-            var siteDictionary = DynamicSiteManager.GetDynamicSitesDictionary(defaultSite);
-            
-            //Set Site Collection
-            foreach (var keyValuePair in siteDictionary)
-            {
-                collection.Add(keyValuePair.Value);
-            }
+            var siteDictionary = DynamicSiteManager.GetDynamicSitesDictionary(defaultSite).ToDictionary(k => k.Key, v => v.Value);
+            ResolveInheritance(siteDictionary);
 
-            ResolveInheritance(collection, siteDictionary);
-
-            _sites = collection;
-            _dynamicSiteDictionary = siteDictionary;
+            return siteDictionary;
         }
 
         private Site ParseDefaultNode(XmlNode node)
@@ -74,7 +91,7 @@ namespace Sitecore.SharedSource.DynamicSites.Sites
             return new Site(DynamicSiteSettings.SiteName, attributeDictionary);
         }
 
-        private void AddInheritedProperties(Site site, IEnumerable<KeyValuePair<string, Site>> siteDictionary)
+        private void AddInheritedProperties(Site site, Dictionary<string, Site> siteDictionary)
         {
             var index = site.Properties["inherits"];
             var inheritedSite = siteDictionary.GetSiteByKey(DynamicSiteManager.CleanCacheKeyName(index));
@@ -87,11 +104,11 @@ namespace Sitecore.SharedSource.DynamicSites.Sites
             }
         }
 
-        private void ResolveInheritance(SiteCollection sites, List<KeyValuePair<string, Site>> siteDictionary)
+        private void ResolveInheritance(Dictionary<string, Site> siteDictionary)
         {
-            foreach (var site in sites.Where(site => !string.IsNullOrEmpty(site.Properties["inherits"])))
+            foreach (var site in siteDictionary.Where(site => !string.IsNullOrEmpty(site.Value.Properties["inherits"])))
             {
-                AddInheritedProperties(site, siteDictionary);
+                AddInheritedProperties(site.Value, siteDictionary);
             }
         }
     }

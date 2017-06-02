@@ -6,6 +6,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Events;
 using Sitecore.SharedSource.DynamicSites.Items.ModuleSettings;
 using Sitecore.SharedSource.DynamicSites.Utilities;
+using Sitecore.Sites;
 using Sitecore.StringExtensions;
 
 namespace Sitecore.SharedSource.DynamicSites.Events
@@ -124,6 +125,40 @@ namespace Sitecore.SharedSource.DynamicSites.Events
             }
         }
 
+        [UsedImplicitly]
+        internal void OnItemPublishRemote(object sender, EventArgs args)
+        {
+            Assert.ArgumentNotNull(sender, "sender");
+            Assert.ArgumentNotNull(args, "args");
+
+            if (args == null) return;
+
+            //Is Module Disabled at the config level?
+            if (DynamicSiteSettings.Disabled) return;
+
+            try
+            {
+                //Skip if current database doesn't keep content items.
+                if (!Context.Database.HasContentItem) return;
+
+                Item rootItem;
+                Database database;
+                EventHelper.GetPublishingInfo(args, out rootItem, out database);
+
+                if (rootItem == null || !DynamicSiteManager.HasBaseTemplate(rootItem)) return;
+                //reset
+                DynamicSiteManager.Reset();
+            }
+            catch (NullReferenceException)
+            {
+                //Do nothing. 
+            }
+            catch (Exception e)
+            {
+                Log.Error($"[DynamicSites] Error: {e.Message} \r\n Stack: {e.StackTrace}", e);
+            }
+        }
+
         private static void DoBaseTemplateUpdates([NotNull] Item item, ItemChanges itemChanges)
         {
             var siteSettings = (DynamicSiteSettingsItem)item;
@@ -173,7 +208,7 @@ namespace Sitecore.SharedSource.DynamicSites.Events
             if (!DynamicSiteManager.HasBaseTemplate(item)) return;
 
             DynamicSiteManager.PublishItemChanges(item);
-            DynamicSiteManager.ClearCache();
+            DynamicSiteManager.Reset();
         }
     }
 }

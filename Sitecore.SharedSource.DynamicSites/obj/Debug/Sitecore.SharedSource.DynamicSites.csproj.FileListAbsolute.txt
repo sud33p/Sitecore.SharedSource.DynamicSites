@@ -15,3 +15,16 @@ C:\Users\pnavarra\Documents\GitHub\Sitecore.SharedSource.DynamicSites\Sitecore.S
 C:\Users\pnavarra\Documents\GitHub\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\Sitecore.SharedSource.DynamicSites.csprojResolveAssemblyReference.cache
 C:\Users\pnavarra\Documents\GitHub\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\SharedSource.Sitecore.DynamicSites.dll
 C:\Users\pnavarra\Documents\GitHub\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\SharedSource.Sitecore.DynamicSites.pdb
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\SharedSource.Sitecore.DynamicSites.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\SharedSource.Sitecore.DynamicSites.pdb
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\SharedSource.Sitecore.ValueListField.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Sitecore.ContentSearch.Linq.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Sitecore.Kernel.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Newtonsoft.Json.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\SharedSource.Sitecore.DynamicSites.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\SharedSource.Sitecore.DynamicSites.pdb
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Microsoft.Extensions.DependencyInjection.dll
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Microsoft.Extensions.DependencyInjection.xml
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Source\Sitecore.SharedSource.DynamicSites\Sitecore.SharedSource.DynamicSites\obj\Debug\Sitecore.SharedSource.DynamicSites.csprojResolveAssemblyReference.cache
